@@ -73,9 +73,13 @@ const PlayerContextProvider = (props)=>{
                 setPlayStatus(true);
             }
         }
+
+        const seekSong = async (e)=>{
+            audioref.current.currentTime = ((e.nativeEvent.offsetX/seekBg.current.offsetWidth)*audioref.current.duration)
+        }
         
         const contextValue = {
-            audioref,seekBar,seekBg,track,settrack,playStatus,setPlayStatus,time,SetTime,play,pause,playWithId,prev,next
+            audioref,seekBar,seekBg,track,settrack,playStatus,setPlayStatus,time,SetTime,play,pause,playWithId,prev,next,seekSong
         }
     return (
         <PlayerContext.Provider value={contextValue}>
