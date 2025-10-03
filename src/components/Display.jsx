@@ -9,6 +9,7 @@ const display = () => {
   const displayref = useRef();
   const location =useLocation();
 
+  
   const isalbum = location.pathname.includes("album");
   const albumId= isalbum?location.pathname.slice(-1):"";
   const bgcolor = albumsData[Number(albumId)].bgColor
