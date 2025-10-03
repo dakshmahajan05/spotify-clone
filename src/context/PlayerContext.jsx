@@ -57,10 +57,26 @@ const PlayerContextProvider = (props)=>{
             }, 1000);
         },[audioref])
 
-    const contextValue = {
-        audioref,seekBar,seekBg,track,settrack,playStatus,setPlayStatus,time,SetTime,play,pause,playWithId
-    }
-
+        
+        const prev =async ()=>{
+            if(track.id>0){
+                await settrack(songsData[track.id-1])
+                await audioref.current.play();
+                setPlayStatus(true);
+            }
+        }
+        
+        const next =async ()=>{
+            if(track.id<songsData.length-1){
+                await settrack(songsData[track.id+1])
+                await audioref.current.play();
+                setPlayStatus(true);
+            }
+        }
+        
+        const contextValue = {
+            audioref,seekBar,seekBg,track,settrack,playStatus,setPlayStatus,time,SetTime,play,pause,playWithId,prev,next
+        }
     return (
         <PlayerContext.Provider value={contextValue}>
             {props.children}
